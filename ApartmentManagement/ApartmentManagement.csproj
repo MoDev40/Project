@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{747919EB-C931-4010-8CB9-A70105E6AF8F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ApartmentManagement</RootNamespace>
+    <AssemblyName>ApartmentManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.4.0.3\lib\net472\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApartFloors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApartFloors.Designer.cs">
+      <DependentUpon>ApartFloors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Apartment.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApartmentManagement.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApartmentManagement.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApartmentManagement.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApartmentManagement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApartmentManagement.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Floor.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getActiveLease_Result.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getExpiredLease_Result.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getMaintenancePayment_Result.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getPaymentInfo_Result.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getTerminatedLease_Result.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeasingAgreement.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogedTenant.cs" />
+    <Compile Include="LogedUser.cs" />
+    <Compile Include="Login_Result.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MaintenanceAssignment.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MaintenanceRequest.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Payment.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Position.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReadRole_Result.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReadTenant_Result.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReadUser_Result.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Role.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RolesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RolesForm.Designer.cs">
+      <DependentUpon>RolesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ApartmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApartmentForm.Designer.cs">
+      <DependentUpon>ApartmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LeasingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LeasingForm.Designer.cs">
+      <DependentUpon>LeasingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogInForm.Designer.cs">
+      <DependentUpon>LogInForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MaintenanceAssignForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MaintenanceAssignForm.Designer.cs">
+      <DependentUpon>MaintenanceAssignForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MaintenanceRequestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MaintenanceRequestForm.Designer.cs">
+      <DependentUpon>MaintenanceRequestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordManager.cs" />
+    <Compile Include="PaymentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PaymentForm.Designer.cs">
+      <DependentUpon>PaymentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Staff.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StaffForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StaffForm.Designer.cs">
+      <DependentUpon>StaffForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tenant.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TenantsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TenantsForm.Designer.cs">
+      <DependentUpon>TenantsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Toggle.cs" />
+    <Compile Include="User.cs">
+      <DependentUpon>ApartmentManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsersForm.Designer.cs">
+      <DependentUpon>UsersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Validations.cs" />
+    <EmbeddedResource Include="ApartFloors.resx">
+      <DependentUpon>ApartFloors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ApartmentForm.resx">
+      <DependentUpon>ApartmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard.resx">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LeasingForm.resx">
+      <DependentUpon>LeasingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogInForm.resx">
+      <DependentUpon>LogInForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MaintenanceAssignForm.resx">
+      <DependentUpon>MaintenanceAssignForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MaintenanceRequestForm.resx">
+      <DependentUpon>MaintenanceRequestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PaymentForm.resx">
+      <DependentUpon>PaymentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StaffForm.resx">
+      <DependentUpon>StaffForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TenantsForm.resx">
+      <DependentUpon>TenantsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsersForm.resx">
+      <DependentUpon>UsersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EntityDeploy Include="ApartmentManagement.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ApartmentManagement.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ApartmentManagement.edmx.diagram">
+      <DependentUpon>ApartmentManagement.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\apartments.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\landlord.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blue Illustrative Luxury Real Estate Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\employee.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forgot-password.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lease.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\staffs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wallet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\apartment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\renovation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ApartmentManagement.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ApartmentManagement.edmx</DependentUpon>
+      <LastGenOutput>ApartmentManagement.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ApartmentManagement.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ApartmentManagement.edmx</DependentUpon>
+      <LastGenOutput>ApartmentManagement.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

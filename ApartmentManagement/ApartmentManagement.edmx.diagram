@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a522a52b2644461d950a20a24479de0e" Name="Diagram1">
+        <EntityTypeShape EntityType="dbApartmentManagementModel.Apartment" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbApartmentManagementModel.Floor" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbApartmentManagementModel.LeasingAgreement" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbApartmentManagementModel.MaintenanceAssignment" Width="1.5" PointX="13.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbApartmentManagementModel.MaintenanceRequest" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbApartmentManagementModel.Payment" Width="1.5" PointX="10.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbApartmentManagementModel.Position" Width="1.5" PointX="9" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbApartmentManagementModel.Role" Width="1.5" PointX="11.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbApartmentManagementModel.Staff" Width="1.5" PointX="11.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbApartmentManagementModel.Tenant" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbApartmentManagementModel.User" Width="1.5" PointX="13.5" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="dbApartmentManagementModel.FK__Floors__Apartmen__4C6B5938" ManuallyRouted="false" />
+        <AssociationConnector Association="dbApartmentManagementModel.FK__LeasingAg__Apart__5D95E53A" ManuallyRouted="false" />
+        <AssociationConnector Association="dbApartmentManagementModel.FK__Maintenan__Apart__0E391C95" ManuallyRouted="false" />
+        <AssociationConnector Association="dbApartmentManagementModel.FK__LeasingAg__Floor__5F7E2DAC" ManuallyRouted="false" />
+        <AssociationConnector Association="dbApartmentManagementModel.FK__Maintenan__Floor__0F2D40CE" ManuallyRouted="false" />
+        <AssociationConnector Association="dbApartmentManagementModel.FK__LeasingAg__Tenan__5E8A0973" ManuallyRouted="false" />
+        <AssociationConnector Association="dbApartmentManagementModel.FK__Payments__LeaseI__0880433F" ManuallyRouted="false" />
+        <AssociationConnector Association="dbApartmentManagementModel.FK_Payments_LeasingAgreement" ManuallyRouted="false" />
+        <AssociationConnector Association="dbApartmentManagementModel.FK__Maintenan__Assig__14E61A24" ManuallyRouted="false" />
+        <AssociationConnector Association="dbApartmentManagementModel.FK__Maintenan__Reque__13F1F5EB" ManuallyRouted="false" />
+        <AssociationConnector Association="dbApartmentManagementModel.FK__Maintenan__Tenan__2057CCD0" ManuallyRouted="false" />
+        <AssociationConnector Association="dbApartmentManagementModel.FK__Payments__Mainte__22401542" ManuallyRouted="false" />
+        <AssociationConnector Association="dbApartmentManagementModel.FK__Staff__PositionI__29221CFB" ManuallyRouted="false" />
+        <AssociationConnector Association="dbApartmentManagementModel.FK__Users__RoleID__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="dbApartmentManagementModel.FK__Users__StaffID__6E01572D" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

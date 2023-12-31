@@ -1,0 +1,680 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbApartmentManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Apartment">
+    <Key>
+      <PropertyRef Name="ApartmentId" />
+    </Key>
+    <Property Name="ApartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApartmentName" Type="String" MaxLength="26" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="OwnerContact" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="OwnerEmail" Type="String" MaxLength="140" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Floors" Relationship="Self.FK__Floors__Apartmen__4C6B5938" FromRole="Apartments" ToRole="Floors" />
+    <NavigationProperty Name="LeasingAgreements" Relationship="Self.FK__LeasingAg__Apart__5D95E53A" FromRole="Apartments" ToRole="LeasingAgreement" />
+    <NavigationProperty Name="MaintenanceRequests" Relationship="Self.FK__Maintenan__Apart__0E391C95" FromRole="Apartments" ToRole="MaintenanceRequests" />
+  </EntityType>
+  <EntityType Name="Floor">
+    <Key>
+      <PropertyRef Name="FloorID" />
+    </Key>
+    <Property Name="FloorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Rooms" Type="String" MaxLength="170" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FloorNumber" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="ApartmentID" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Apartment" Relationship="Self.FK__Floors__Apartmen__4C6B5938" FromRole="Floors" ToRole="Apartments" />
+    <NavigationProperty Name="LeasingAgreements" Relationship="Self.FK__LeasingAg__Floor__5F7E2DAC" FromRole="Floors" ToRole="LeasingAgreement" />
+    <NavigationProperty Name="MaintenanceRequests" Relationship="Self.FK__Maintenan__Floor__0F2D40CE" FromRole="Floors" ToRole="MaintenanceRequests" />
+  </EntityType>
+  <EntityType Name="LeasingAgreement">
+    <Key>
+      <PropertyRef Name="LeaseId" />
+    </Key>
+    <Property Name="LeaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApartmentId" Type="Int32" Nullable="false" />
+    <Property Name="TenantID" Type="Int32" Nullable="false" />
+    <Property Name="FloorID" Type="Int32" />
+    <Property Name="MoveInDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="LeaseStartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="LeaseEndDate" Type="DateTime" Precision="0" />
+    <Property Name="AgreementStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Apartment" Relationship="Self.FK__LeasingAg__Apart__5D95E53A" FromRole="LeasingAgreement" ToRole="Apartments" />
+    <NavigationProperty Name="Floor" Relationship="Self.FK__LeasingAg__Floor__5F7E2DAC" FromRole="LeasingAgreement" ToRole="Floors" />
+    <NavigationProperty Name="Tenant" Relationship="Self.FK__LeasingAg__Tenan__5E8A0973" FromRole="LeasingAgreement" ToRole="Tenants" />
+    <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__LeaseI__0880433F" FromRole="LeasingAgreement" ToRole="Payments" />
+    <NavigationProperty Name="Payments1" Relationship="Self.FK_Payments_LeasingAgreement" FromRole="LeasingAgreement" ToRole="Payments" />
+  </EntityType>
+  <EntityType Name="MaintenanceAssignment">
+    <Key>
+      <PropertyRef Name="AssignmentID" />
+    </Key>
+    <Property Name="AssignmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RequestID" Type="Int32" Nullable="false" />
+    <Property Name="AssignedStaffID" Type="Int32" Nullable="false" />
+    <Property Name="AssignmentDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CompletionStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK__Maintenan__Assig__14E61A24" FromRole="MaintenanceAssignments" ToRole="Staff" />
+    <NavigationProperty Name="MaintenanceRequest" Relationship="Self.FK__Maintenan__Reque__13F1F5EB" FromRole="MaintenanceAssignments" ToRole="MaintenanceRequests" />
+  </EntityType>
+  <EntityType Name="MaintenanceRequest">
+    <Key>
+      <PropertyRef Name="RequestID" />
+    </Key>
+    <Property Name="RequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApartmentID" Type="Int32" Nullable="false" />
+    <Property Name="FloorNum" Type="Int32" />
+    <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Description" Type="String" MaxLength="180" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenantID" Type="Int32" />
+    <NavigationProperty Name="Apartment" Relationship="Self.FK__Maintenan__Apart__0E391C95" FromRole="MaintenanceRequests" ToRole="Apartments" />
+    <NavigationProperty Name="Floor" Relationship="Self.FK__Maintenan__Floor__0F2D40CE" FromRole="MaintenanceRequests" ToRole="Floors" />
+    <NavigationProperty Name="MaintenanceAssignments" Relationship="Self.FK__Maintenan__Reque__13F1F5EB" FromRole="MaintenanceRequests" ToRole="MaintenanceAssignments" />
+    <NavigationProperty Name="Tenant" Relationship="Self.FK__Maintenan__Tenan__2057CCD0" FromRole="MaintenanceRequests" ToRole="Tenants" />
+    <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__Mainte__22401542" FromRole="MaintenanceRequests" ToRole="Payments" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="PaymentID" />
+    </Key>
+    <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LeaseID" Type="Int32" />
+    <Property Name="PaymentAmount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PaymentDesc" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MaintenanceID" Type="Int32" />
+    <NavigationProperty Name="LeasingAgreement" Relationship="Self.FK__Payments__LeaseI__0880433F" FromRole="Payments" ToRole="LeasingAgreement" />
+    <NavigationProperty Name="LeasingAgreement1" Relationship="Self.FK_Payments_LeasingAgreement" FromRole="Payments" ToRole="LeasingAgreement" />
+    <NavigationProperty Name="MaintenanceRequest" Relationship="Self.FK__Payments__Mainte__22401542" FromRole="Payments" ToRole="MaintenanceRequests" />
+  </EntityType>
+  <EntityType Name="Position">
+    <Key>
+      <PropertyRef Name="PositionID" />
+    </Key>
+    <Property Name="PositionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Position1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Salary" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Staffs" Relationship="Self.FK__Staff__PositionI__29221CFB" FromRole="Position" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleID__6D0D32F4" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="StaffID" />
+    </Key>
+    <Property Name="StaffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="160" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ContactNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PositionID" Type="Int32" />
+    <NavigationProperty Name="MaintenanceAssignments" Relationship="Self.FK__Maintenan__Assig__14E61A24" FromRole="Staff" ToRole="MaintenanceAssignments" />
+    <NavigationProperty Name="Position" Relationship="Self.FK__Staff__PositionI__29221CFB" FromRole="Staff" ToRole="Position" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Users__StaffID__6E01572D" FromRole="Staff" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Tenant">
+    <Key>
+      <PropertyRef Name="TenantID" />
+    </Key>
+    <Property Name="TenantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ContactNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="LeasingAgreements" Relationship="Self.FK__LeasingAg__Tenan__5E8A0973" FromRole="Tenants" ToRole="LeasingAgreement" />
+    <NavigationProperty Name="MaintenanceRequests" Relationship="Self.FK__Maintenan__Tenan__2057CCD0" FromRole="Tenants" ToRole="MaintenanceRequests" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PasswordHash" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="StaffID" Type="Int32" />
+    <NavigationProperty Name="Role" Relationship="Self.FK__Users__RoleID__6D0D32F4" FromRole="Users" ToRole="Roles" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK__Users__StaffID__6E01572D" FromRole="Users" ToRole="Staff" />
+  </EntityType>
+  <Association Name="FK__Floors__Apartmen__4C6B5938">
+    <End Role="Apartments" Type="Self.Apartment" Multiplicity="0..1" />
+    <End Role="Floors" Type="Self.Floor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Apartments">
+        <PropertyRef Name="ApartmentId" />
+      </Principal>
+      <Dependent Role="Floors">
+        <PropertyRef Name="ApartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LeasingAg__Apart__5D95E53A">
+    <End Role="Apartments" Type="Self.Apartment" Multiplicity="1" />
+    <End Role="LeasingAgreement" Type="Self.LeasingAgreement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Apartments">
+        <PropertyRef Name="ApartmentId" />
+      </Principal>
+      <Dependent Role="LeasingAgreement">
+        <PropertyRef Name="ApartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Maintenan__Apart__0E391C95">
+    <End Role="Apartments" Type="Self.Apartment" Multiplicity="1" />
+    <End Role="MaintenanceRequests" Type="Self.MaintenanceRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Apartments">
+        <PropertyRef Name="ApartmentId" />
+      </Principal>
+      <Dependent Role="MaintenanceRequests">
+        <PropertyRef Name="ApartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LeasingAg__Floor__5F7E2DAC">
+    <End Role="Floors" Type="Self.Floor" Multiplicity="0..1" />
+    <End Role="LeasingAgreement" Type="Self.LeasingAgreement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Floors">
+        <PropertyRef Name="FloorID" />
+      </Principal>
+      <Dependent Role="LeasingAgreement">
+        <PropertyRef Name="FloorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Maintenan__Floor__0F2D40CE">
+    <End Role="Floors" Type="Self.Floor" Multiplicity="0..1" />
+    <End Role="MaintenanceRequests" Type="Self.MaintenanceRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Floors">
+        <PropertyRef Name="FloorID" />
+      </Principal>
+      <Dependent Role="MaintenanceRequests">
+        <PropertyRef Name="FloorNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LeasingAg__Tenan__5E8A0973">
+    <End Role="Tenants" Type="Self.Tenant" Multiplicity="1" />
+    <End Role="LeasingAgreement" Type="Self.LeasingAgreement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenants">
+        <PropertyRef Name="TenantID" />
+      </Principal>
+      <Dependent Role="LeasingAgreement">
+        <PropertyRef Name="TenantID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Payments__LeaseI__0880433F">
+    <End Role="LeasingAgreement" Type="Self.LeasingAgreement" Multiplicity="0..1" />
+    <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LeasingAgreement">
+        <PropertyRef Name="LeaseId" />
+      </Principal>
+      <Dependent Role="Payments">
+        <PropertyRef Name="LeaseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payments_LeasingAgreement">
+    <End Role="LeasingAgreement" Type="Self.LeasingAgreement" Multiplicity="0..1" />
+    <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LeasingAgreement">
+        <PropertyRef Name="LeaseId" />
+      </Principal>
+      <Dependent Role="Payments">
+        <PropertyRef Name="LeaseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Maintenan__Assig__14E61A24">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="MaintenanceAssignments" Type="Self.MaintenanceAssignment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="StaffID" />
+      </Principal>
+      <Dependent Role="MaintenanceAssignments">
+        <PropertyRef Name="AssignedStaffID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Maintenan__Reque__13F1F5EB">
+    <End Role="MaintenanceRequests" Type="Self.MaintenanceRequest" Multiplicity="1" />
+    <End Role="MaintenanceAssignments" Type="Self.MaintenanceAssignment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaintenanceRequests">
+        <PropertyRef Name="RequestID" />
+      </Principal>
+      <Dependent Role="MaintenanceAssignments">
+        <PropertyRef Name="RequestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Maintenan__Tenan__2057CCD0">
+    <End Role="Tenants" Type="Self.Tenant" Multiplicity="0..1" />
+    <End Role="MaintenanceRequests" Type="Self.MaintenanceRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenants">
+        <PropertyRef Name="TenantID" />
+      </Principal>
+      <Dependent Role="MaintenanceRequests">
+        <PropertyRef Name="TenantID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Payments__Mainte__22401542">
+    <End Role="MaintenanceRequests" Type="Self.MaintenanceRequest" Multiplicity="0..1" />
+    <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaintenanceRequests">
+        <PropertyRef Name="RequestID" />
+      </Principal>
+      <Dependent Role="Payments">
+        <PropertyRef Name="MaintenanceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__PositionI__29221CFB">
+    <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position">
+        <PropertyRef Name="PositionID" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="PositionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users__RoleID__6D0D32F4">
+    <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users__StaffID__6E01572D">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="StaffID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="StaffID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbApartmentManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Apartments" EntityType="Self.Apartment" />
+    <EntitySet Name="Floors" EntityType="Self.Floor" />
+    <EntitySet Name="LeasingAgreements" EntityType="Self.LeasingAgreement" />
+    <EntitySet Name="MaintenanceAssignments" EntityType="Self.MaintenanceAssignment" />
+    <EntitySet Name="MaintenanceRequests" EntityType="Self.MaintenanceRequest" />
+    <EntitySet Name="Payments" EntityType="Self.Payment" />
+    <EntitySet Name="Positions" EntityType="Self.Position" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Staffs" EntityType="Self.Staff" />
+    <EntitySet Name="Tenants" EntityType="Self.Tenant" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK__Floors__Apartmen__4C6B5938" Association="Self.FK__Floors__Apartmen__4C6B5938">
+      <End Role="Apartments" EntitySet="Apartments" />
+      <End Role="Floors" EntitySet="Floors" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LeasingAg__Apart__5D95E53A" Association="Self.FK__LeasingAg__Apart__5D95E53A">
+      <End Role="Apartments" EntitySet="Apartments" />
+      <End Role="LeasingAgreement" EntitySet="LeasingAgreements" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Maintenan__Apart__0E391C95" Association="Self.FK__Maintenan__Apart__0E391C95">
+      <End Role="Apartments" EntitySet="Apartments" />
+      <End Role="MaintenanceRequests" EntitySet="MaintenanceRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LeasingAg__Floor__5F7E2DAC" Association="Self.FK__LeasingAg__Floor__5F7E2DAC">
+      <End Role="Floors" EntitySet="Floors" />
+      <End Role="LeasingAgreement" EntitySet="LeasingAgreements" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Maintenan__Floor__0F2D40CE" Association="Self.FK__Maintenan__Floor__0F2D40CE">
+      <End Role="Floors" EntitySet="Floors" />
+      <End Role="MaintenanceRequests" EntitySet="MaintenanceRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LeasingAg__Tenan__5E8A0973" Association="Self.FK__LeasingAg__Tenan__5E8A0973">
+      <End Role="Tenants" EntitySet="Tenants" />
+      <End Role="LeasingAgreement" EntitySet="LeasingAgreements" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Payments__LeaseI__0880433F" Association="Self.FK__Payments__LeaseI__0880433F">
+      <End Role="LeasingAgreement" EntitySet="LeasingAgreements" />
+      <End Role="Payments" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payments_LeasingAgreement" Association="Self.FK_Payments_LeasingAgreement">
+      <End Role="LeasingAgreement" EntitySet="LeasingAgreements" />
+      <End Role="Payments" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Maintenan__Assig__14E61A24" Association="Self.FK__Maintenan__Assig__14E61A24">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="MaintenanceAssignments" EntitySet="MaintenanceAssignments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Maintenan__Reque__13F1F5EB" Association="Self.FK__Maintenan__Reque__13F1F5EB">
+      <End Role="MaintenanceRequests" EntitySet="MaintenanceRequests" />
+      <End Role="MaintenanceAssignments" EntitySet="MaintenanceAssignments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Maintenan__Tenan__2057CCD0" Association="Self.FK__Maintenan__Tenan__2057CCD0">
+      <End Role="Tenants" EntitySet="Tenants" />
+      <End Role="MaintenanceRequests" EntitySet="MaintenanceRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Payments__Mainte__22401542" Association="Self.FK__Payments__Mainte__22401542">
+      <End Role="MaintenanceRequests" EntitySet="MaintenanceRequests" />
+      <End Role="Payments" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__PositionI__29221CFB" Association="Self.FK__Staff__PositionI__29221CFB">
+      <End Role="Position" EntitySet="Positions" />
+      <End Role="Staff" EntitySet="Staffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__RoleID__6D0D32F4" Association="Self.FK__Users__RoleID__6D0D32F4">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__StaffID__6E01572D" Association="Self.FK__Users__StaffID__6E01572D">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <FunctionImport Name="CreateApartment" ReturnType="Collection(String)">
+      <Parameter Name="ApartmentName" Mode="In" Type="String" />
+      <Parameter Name="Location" Mode="In" Type="String" />
+      <Parameter Name="OwnerContact" Mode="In" Type="String" />
+      <Parameter Name="OwnerEmail" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="createFloor" ReturnType="Collection(String)">
+      <Parameter Name="FloorNum" Mode="In" Type="Int32" />
+      <Parameter Name="Rooms" Mode="In" Type="String" />
+      <Parameter Name="Price" Mode="In" Type="Decimal" />
+      <Parameter Name="ApartmentID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="CreateLeasingAgreement" ReturnType="Collection(String)">
+      <Parameter Name="ApartmentId" Mode="In" Type="Int32" />
+      <Parameter Name="TenantID" Mode="In" Type="Int32" />
+      <Parameter Name="FloorID" Mode="In" Type="Int32" />
+      <Parameter Name="MoveInDate" Mode="In" Type="DateTime" />
+      <Parameter Name="LeaseStartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="LeaseEndDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="CreateMaintenanceAssign" ReturnType="Collection(String)">
+      <Parameter Name="RequestID" Mode="In" Type="Int32" />
+      <Parameter Name="AssignedStaff" Mode="In" Type="Int32" />
+      <Parameter Name="AssingDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="CreateMaintenanceReq" ReturnType="Collection(String)">
+      <Parameter Name="ApartmentID" Mode="In" Type="Int32" />
+      <Parameter Name="FloorNum" Mode="In" Type="Int32" />
+      <Parameter Name="ReqDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ReqDesc" Mode="In" Type="String" />
+      <Parameter Name="TenantID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="CreatePayment" ReturnType="Collection(String)">
+      <Parameter Name="LeaseID" Mode="In" Type="Int32" />
+      <Parameter Name="maintenanceID" Mode="In" Type="Int32" />
+      <Parameter Name="PaymentAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="PaymentDate" Mode="In" Type="DateTime" />
+      <Parameter Name="PaymentDesc" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CreateStaff" ReturnType="Collection(String)">
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="ContactNumber" Mode="In" Type="String" />
+      <Parameter Name="PositionID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="CreateTenant" ReturnType="Collection(String)">
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="ContactNumber" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CreateUser" ReturnType="Collection(String)">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="PasswordHash" Mode="In" Type="String" />
+      <Parameter Name="RoleID" Mode="In" Type="Int32" />
+      <Parameter Name="StaffID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteApartment" ReturnType="Collection(String)">
+      <Parameter Name="ApartmentId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="deleteFloor" ReturnType="Collection(String)">
+      <Parameter Name="FloorID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="deleteLeasing" ReturnType="Collection(String)">
+      <Parameter Name="leaseID" Mode="In" Type="Int32" />
+      <Parameter Name="ApartmentId" Mode="In" Type="Int32" />
+      <Parameter Name="FloorID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteMaintenanceAssign">
+      <Parameter Name="AssigntID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteMaintenanceReq">
+      <Parameter Name="RequestID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeletePayment" ReturnType="Collection(String)">
+      <Parameter Name="PaymentID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteRole">
+      <Parameter Name="RoleID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteStaff" ReturnType="Collection(String)">
+      <Parameter Name="StaffID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteTenant" ReturnType="Collection(String)">
+      <Parameter Name="TenantID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteUser" ReturnType="Collection(String)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getLeaseID" ReturnType="Collection(Int32)">
+      <Parameter Name="ApartID" Mode="In" Type="Int32" />
+      <Parameter Name="FloorID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getPosition" ReturnType="Collection(String)">
+      <Parameter Name="PositionID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getPositionID" ReturnType="Collection(Int32)">
+      <Parameter Name="Position" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Login" ReturnType="Collection(dbApartmentManagementModel.Login_Result)">
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="userID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ReadApartment">
+      <Parameter Name="ApartmentId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ReadRole" ReturnType="Collection(dbApartmentManagementModel.ReadRole_Result)">
+      <Parameter Name="RoleID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ReadStaff">
+      <Parameter Name="StaffID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ReadTenant" ReturnType="Collection(dbApartmentManagementModel.ReadTenant_Result)">
+      <Parameter Name="TenantID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ReadUser" ReturnType="Collection(dbApartmentManagementModel.ReadUser_Result)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spCreateRole" ReturnType="Collection(String)">
+      <Parameter Name="RoleName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateApartment" ReturnType="Collection(String)">
+      <Parameter Name="ApartmentId" Mode="In" Type="Int32" />
+      <Parameter Name="ApartmentName" Mode="In" Type="String" />
+      <Parameter Name="Location" Mode="In" Type="String" />
+      <Parameter Name="OwnerContact" Mode="In" Type="String" />
+      <Parameter Name="OwnerEmail" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="updateFloor" ReturnType="Collection(String)">
+      <Parameter Name="FloorID" Mode="In" Type="Int32" />
+      <Parameter Name="FloorNum" Mode="In" Type="Int32" />
+      <Parameter Name="Rooms" Mode="In" Type="String" />
+      <Parameter Name="Price" Mode="In" Type="Decimal" />
+      <Parameter Name="ApartmentID" Mode="In" Type="Int32" />
+      <Parameter Name="status" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateLeasingAgreement" ReturnType="Collection(String)">
+      <Parameter Name="LeasingAgreementId" Mode="In" Type="Int32" />
+      <Parameter Name="ApartmentId" Mode="In" Type="Int32" />
+      <Parameter Name="TenantID" Mode="In" Type="Int32" />
+      <Parameter Name="FloorID" Mode="In" Type="Int32" />
+      <Parameter Name="MoveInDate" Mode="In" Type="DateTime" />
+      <Parameter Name="LeaseStartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="LeaseEndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="AgreementStatus" Mode="In" Type="String" />
+      <Parameter Name="IncorectFloorID" Mode="In" Type="Int32" />
+      <Parameter Name="IncorrectApartID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateMaintenanceAssign" ReturnType="Collection(String)">
+      <Parameter Name="AssingmentID" Mode="In" Type="Int32" />
+      <Parameter Name="RequestID" Mode="In" Type="Int32" />
+      <Parameter Name="AssignedStaff" Mode="In" Type="Int32" />
+      <Parameter Name="AssingDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Status" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateMaintenanceReq" ReturnType="Collection(String)">
+      <Parameter Name="RequestID" Mode="In" Type="Int32" />
+      <Parameter Name="ApartmentID" Mode="In" Type="Int32" />
+      <Parameter Name="FloorNum" Mode="In" Type="Int32" />
+      <Parameter Name="TenantID" Mode="In" Type="Int32" />
+      <Parameter Name="ReqDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ReqDesc" Mode="In" Type="String" />
+      <Parameter Name="Status" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdatePayment" ReturnType="Collection(String)">
+      <Parameter Name="PaymentID" Mode="In" Type="Int32" />
+      <Parameter Name="LeaseID" Mode="In" Type="Int32" />
+      <Parameter Name="PaymentAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="PaymentDate" Mode="In" Type="DateTime" />
+      <Parameter Name="PaymentDesc" Mode="In" Type="String" />
+      <Parameter Name="maintenanceID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="updateReqStatus">
+      <Parameter Name="reqID" Mode="In" Type="Int32" />
+      <Parameter Name="status" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateRole">
+      <Parameter Name="RoleID" Mode="In" Type="Int32" />
+      <Parameter Name="RoleName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateStaff" ReturnType="Collection(String)">
+      <Parameter Name="StaffID" Mode="In" Type="Int32" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="ContactNumber" Mode="In" Type="String" />
+      <Parameter Name="PositionID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateTenant" ReturnType="Collection(String)">
+      <Parameter Name="TenantID" Mode="In" Type="Int32" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="ContactNumber" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateUser" ReturnType="Collection(String)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="PasswordHash" Mode="In" Type="String" />
+      <Parameter Name="RoleID" Mode="In" Type="Int32" />
+      <Parameter Name="StaffID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getActiveLease" ReturnType="Collection(dbApartmentManagementModel.getActiveLease_Result)" />
+    <FunctionImport Name="getExpiredLease" ReturnType="Collection(dbApartmentManagementModel.getExpiredLease_Result)" />
+    <FunctionImport Name="getMaintenancePayment" ReturnType="Collection(dbApartmentManagementModel.getMaintenancePayment_Result)" />
+    <FunctionImport Name="getPaymentInfo" ReturnType="Collection(dbApartmentManagementModel.getPaymentInfo_Result)" />
+    <FunctionImport Name="getTerminatedLease" ReturnType="Collection(dbApartmentManagementModel.getTerminatedLease_Result)" />
+  </EntityContainer>
+  <ComplexType Name="Login_Result">
+    <Property Type="String" Name="PasswordHash" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="StaffID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadRole_Result">
+    <Property Type="Int32" Name="RoleID" Nullable="false" />
+    <Property Type="String" Name="RoleName" Nullable="false" MaxLength="25" />
+  </ComplexType>
+  <ComplexType Name="ReadTenant_Result">
+    <Property Type="Int32" Name="TenantID" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ContactNumber" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ReadUser_Result">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="PasswordHash" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="RoleID" Nullable="false" />
+    <Property Type="Int32" Name="StaffID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="getActiveLease_Result">
+    <Property Type="Int32" Name="LeaseId" Nullable="false" />
+    <Property Type="String" Name="Full_name" Nullable="false" MaxLength="77" />
+    <Property Type="String" Name="ApartmentName" Nullable="false" MaxLength="26" />
+    <Property Type="Int32" Name="FloorNumber" Nullable="false" />
+    <Property Type="DateTime" Name="MoveInDate" Nullable="false" />
+    <Property Type="DateTime" Name="LeaseStartDate" Nullable="false" />
+    <Property Type="DateTime" Name="LeaseEndDate" Nullable="true" />
+    <Property Type="String" Name="AgreementStatus" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="getExpiredLease_Result">
+    <Property Type="Int32" Name="LeaseId" Nullable="false" />
+    <Property Type="String" Name="Full_name" Nullable="false" MaxLength="77" />
+    <Property Type="String" Name="ApartmentName" Nullable="false" MaxLength="26" />
+    <Property Type="Int32" Name="FloorNumber" Nullable="false" />
+    <Property Type="DateTime" Name="MoveInDate" Nullable="false" />
+    <Property Type="DateTime" Name="LeaseStartDate" Nullable="false" />
+    <Property Type="DateTime" Name="LeaseEndDate" Nullable="true" />
+    <Property Type="String" Name="AgreementStatus" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="getMaintenancePayment_Result">
+    <Property Type="Int32" Name="PaymentID" Nullable="false" />
+    <Property Type="String" Name="ApartmentName" Nullable="false" MaxLength="26" />
+    <Property Type="Int32" Name="FloorNumber" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="180" />
+    <Property Type="DateTime" Name="PaymentDate" Nullable="false" />
+    <Property Type="Decimal" Name="PaymentAmount" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="String" Name="PaymentDesc" Nullable="false" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="getPaymentInfo_Result">
+    <Property Type="Int32" Name="PaymentID" Nullable="false" />
+    <Property Type="String" Name="Full_name" Nullable="false" MaxLength="77" />
+    <Property Type="String" Name="ApartmentName" Nullable="false" MaxLength="26" />
+    <Property Type="Int32" Name="FloorNumber" Nullable="false" />
+    <Property Type="DateTime" Name="PaymentDate" Nullable="false" />
+    <Property Type="Decimal" Name="PaymentAmount" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="String" Name="PaymentDesc" Nullable="false" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="getTerminatedLease_Result">
+    <Property Type="Int32" Name="LeaseId" Nullable="false" />
+    <Property Type="String" Name="Full_name" Nullable="false" MaxLength="77" />
+    <Property Type="String" Name="ApartmentName" Nullable="false" MaxLength="26" />
+    <Property Type="Int32" Name="FloorNumber" Nullable="false" />
+    <Property Type="DateTime" Name="MoveInDate" Nullable="false" />
+    <Property Type="DateTime" Name="LeaseStartDate" Nullable="false" />
+    <Property Type="DateTime" Name="LeaseEndDate" Nullable="true" />
+    <Property Type="String" Name="AgreementStatus" Nullable="true" MaxLength="20" />
+  </ComplexType>
+</Schema>
